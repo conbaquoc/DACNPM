@@ -1,0 +1,66 @@
+@charset "UTF-8";
+@font-face {
+    font-family: "tcrm";
+    src: url("fonts/tcrm.eot");
+    src: url("fonts/tcrm.eot?#iefix") format("embedded-opentype"), url("fonts/tcrm.woff") format("woff"), url("fonts/tcrm.ttf") format("truetype"), url("fonts/tcrm.svg#tcrm") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+[data-icon]:before {
+    font-family: "tcrm" !important;
+    content: attr(data-icon);
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="anticon-tcrm-"]:before,
+[class*=" anticon-tcrm-"]:before {
+    font-family: "tcrm" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.anticon-tcrm-company:before {
+    content: "\63";
+}
+
+.anticon-tcrm-contact:before {
+    content: "\64";
+}
+
+.anticon-tcrm-dashboard:before {
+    content: "\65";
+}
+
+.anticon-tcrm-employee:before {
+    content: "\66";
+}
+
+.anticon-tcrm-campaign:before {
+    content: "\61";
+}
+
+.anticon-tcrm-setting:before {
+    content: "\62";
+}
+
+.ant-calendar-today .ant-calendar-date {
+    color: #4E7CFF !important;
+    border-color:#4E7CFF !important;
+}
+.ant-calendar-date:hover{
+    background-color: #c2efff !important;;
+}
