@@ -1,0 +1,195 @@
+{
+  "appInfo": {
+    "footer": "Sgroup 2020 Created by Sgroup developers",
+    "name": "Sgroup Admin page"
+  },
+  "input": {
+    "username": {
+      "placeholder": "Tên đăng nhập",
+      "validateMsg": {
+        "required": "Tên đăng nhập không được để trống"
+      }
+    },
+    "fullName": {
+      "placeholder": "Họ và tên",
+      "validateMsg": {
+        "required": "Họ tên không được để trống"
+      }
+    },
+    "firstName": {
+      "placeholder": "Họ",
+      "validateMsg": {
+        "required": "Họ không được để trống"
+      }
+    },
+    "lastName": {
+      "placeholder": "Tên",
+      "validateMsg": {
+        "required": "Tên không được để trống"
+      }
+    },
+    "password": {
+      "placeholder": "Mật khẩu",
+      "validateMsg": {
+        "required": "Mật khẩu không được để trống"
+      }
+    },
+    "confirmPassword": {
+      "placeholder": "Nhập lại mật khẩu",
+      "validateMsg": {
+        "required": "Nhập lại mật khẩu"
+      }
+    },
+    "phoneNumber": {
+      "placeholder": "phoneNumber",
+      "validateMsg": {
+        "required": "phoneNumber không được để trống"
+      }
+    },
+    "propertyName": {
+      "placeholder": "Tên dự án",
+      "validateMsg": {
+        "required": "Tên dự án không được để trống"
+      }
+    },
+    "propertyOverview": {
+      "placeholder": "Tổng quan dự án",
+      "validateMsg": {
+        "required": "Tên dự án không được để trống"
+      }
+    }
+  },
+
+  "form": {
+    "btn": {
+      "add": "Thêm mới",
+      "edit": "Sửa"
+    }
+  },
+
+  "login": {
+    "title": "Đăng nhập",
+    "rememberMe": "Remember me",
+    "loginBtn": "Đăng nhập",
+    "yourphoneNumber": "phoneNumber của bạn",
+    "resetPassword": "Reset password",
+    "password": "Mật khẩu"
+  },
+
+  "register": {
+    "title": "Đăng kí",
+    "registerBtn": "Đăng kí"
+  },
+
+  "forgotPassword": {
+    "title": "Quên mật khẩu",
+    "success": {
+      "title": "Đặt lại mật khẩu thành công",
+      "description": "Kiểm tra phoneNumber và đặt mật khẩu mới"
+    }
+  },
+
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "property": {
+    "title": "Dự án",
+    "listPropertyTitle": "Danh sách dự án",
+    "newPropertyTitle": "Tạo mới dự án"
+  },
+  "transaction": {
+    "title": "Giao dịch",
+    "listTransactionTitle": "Danh sách giao dịch",
+    "detail": {
+      "title": "Chi tiết giao dịch",
+      "generalInfo": "Thông tin chung",
+      "transCode": "Mã giao dịch",
+      "contractCode": "Mã hợp đồng",
+      "transDate": "Ngày giao dịch",
+      "transStatus": "Tình trạng giao dịch",
+      "infoRealtor": "Thông tin cộng tác viên",
+      "fullName": "Họ và tên",
+      "birthday": "Ngày sinh",
+      "phoneNumber": "Số điện thoại",
+      "address": "Địa chỉ",
+      "customerInfo": "Thông tin khách hàng",
+      "idCard": "CMT/Thẻ căng cước",
+      "job": "Nghề nghiệp",
+      "productInfo": "Thông tin sản phẩm",
+      "productCode": "Mã sản phảm",
+      "property": "Dự án",
+      "floor": "Tầng",
+      "area": "Diện tích",
+      "commission": "Tiền hoa hồng",
+      "allCommission": "Tổng tiền hoa hồng",
+      "depositConfirm": "Xác nhận đặt cọc",
+      "sendRequest": "Yêu cầu gửi lại",
+      "cancelTrans": "Hủy bỏ giao dịch",
+      "successTransConfirm": "Xác nhận giao dịch thành công"
+    }
+  },
+  "realtor": {
+    "title": "Người môi giới",
+    "listRealtorTitle": "Danh sách người môi giới"
+  },
+  "user": {
+    "list":{
+      "title":"List User"
+    }
+  },
+  "calendar": {
+    "title": "Calendar",
+    "event":
+    {
+      "create": "Create event",
+      "update": "Update event",
+      "delete": "Delete event",
+      "title": "Set title",
+      "description": "Set description",
+      "save": "Save",
+      "cancel":"Cancel"
+    }
+
+  },
+
+  "button": {
+    "create": "Tạo mới",
+    "add": "Thêm",
+    "edit": "Sửa",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "save": "Lưu",
+    "ok": "Ok",
+    "search": "Tìm kiếm",
+    "reset": "Reset",
+    "resetMyPassword": "Reset Password",
+    "submit": "Submit",
+    "call": "Call",
+    "loadMore": "Load More...",
+    "sentInvite": "Sent Invite",
+    "resendInvite": "Resend Invite",
+    "filter": "Lọc",
+    "clearFilter": "Hủy lọc"
+
+  },
+  "popup": {
+    "alertDelete": "Delete Data",
+    "alertDeleteDes": "Do you want to delete {{customMessage}}?"
+  },
+  "error": {
+    "title": "Oops!",
+    "description": "Some thing wrong!"
+  },
+  "success": {
+    "title": "Successfully!",
+    "description": "the update is successful!"
+  },
+  "gender": {
+    "title": "Gender",
+    "male": "Male",
+    "female": "Female"
+  },
+  "placeholder": {
+    "undefined": "select..."
+  }
+}

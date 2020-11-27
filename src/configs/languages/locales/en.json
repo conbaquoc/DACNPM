@@ -1,0 +1,153 @@
+{
+  "appInfo": {
+    "footer": "Sgroup @2020 Created by Sgroup developers",
+    "name": "Sgroup Admin page"
+  },
+  "input": {
+    "username": {
+      "placeholder": "Username",
+      "validateMsg": {
+        "required": "Please input your username!"
+      }
+    },
+    "fullName": {
+      "placeholder": "Full Name",
+      "validateMsg": {
+        "required": "Please input your full name!"
+      }
+    },
+    "firstName": {
+      "placeholder": "First Name",
+      "validateMsg": {
+        "required": "Please input your first name!"
+      }
+    },
+    "lastName": {
+      "placeholder": "Last Name",
+      "validateMsg": {
+        "required": "Please input your last name!"
+      }
+    },
+    "password": {
+      "placeholder": "Password",
+      "validateMsg": {
+        "required": "Please input your password!"
+      }
+    },
+    "confirmPassword": {
+      "placeholder": "Confirm Password",
+      "validateMsg": {
+        "required": "Please input your confirm password!"
+      }
+    },
+    "phoneNumber": {
+      "placeholder": "phoneNumber",
+      "validateMsg": {
+        "required": "Please input your phoneNumber!"
+      }
+    }
+  },
+
+  "form": {
+    "btn": {
+      "add": "Add new",
+      "edit": "Edit"
+    }
+  },
+
+  "login": {
+    "title": "Login",
+    "rememberMe": "Remember me",
+    "loginBtn": "Log in",
+    "yourphoneNumber": "Your phoneNumber",
+    "resetPassword": "Reset password",
+    "password": "Password"
+  },
+
+  "register": {
+    "title": "Register",
+    "registerBtn": "Register"
+  },
+
+  "forgotPassword": {
+    "title": "Forgot password",
+    "success": {
+      "title": "Reset Password Success!",
+      "description": "Please check your phoneNumber and create a new password."
+    }
+  },
+
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "property": {
+    "title": "Property",
+    "listPropertyTitle": "Property list",
+    "newPropertyTitle": "Create new property"
+  },
+  "transaction": {
+    "title": "Transaction",
+    "detail": {
+      "title": "Transaction detail",
+      "generalInfo": "General infomation"
+    }
+  },
+
+  "user": {
+    "list":{
+      "title":"List User"
+    }
+  },
+  "calendar": {
+    "title": "Calendar",
+    "event":
+    {
+      "create": "Create event",
+      "update": "Update event",
+      "delete": "Delete event",
+      "title": "Set title",
+      "description": "Set description",
+      "save": "Save",
+      "cancel":"Cancel"
+    }
+    
+  },
+
+  "button": {
+    "create": "Create",
+    "add": "Add",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "save": "Save",
+    "ok": "Ok",
+    "search": "Search",
+    "reset": "Reset",
+    "resetMyPassword": "Reset Password",
+    "submit": "Submit",
+    "call": "Call",
+    "loadMore": "Load More...",
+    "sentInvite": "Sent Invite",
+    "resendInvite": "Resend Invite"
+  },
+  "popup": {
+    "alertDelete": "Delete Data",
+    "alertDeleteDes": "Do you want to delete {{customMessage}}?"
+  },
+  "error": {
+    "title": "Oops!",
+    "description": "Some thing wrong!"
+  },
+  "success": {
+    "title": "Successfully!",
+    "description": "the update is successful!"
+  },
+  "gender": {
+    "title": "Gender",
+    "male": "Male",
+    "female": "Female"
+  },
+  "placeholder": {
+    "undefined": "select..."
+  }
+}

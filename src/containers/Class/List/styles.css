@@ -1,0 +1,28 @@
+@import '~antd/dist/antd.css';
+
+
+.ant-table {
+  font-family: Gill Sans Extrabold, sans-serif;
+  border-width: 3em;
+  color: black;
+ 
+  text-align: center;
+  border-color: black;
+  
+}
+.ant-table-thead > tr > th {
+  background: #0051ff;
+  color:white;
+  text-align: center;
+  font-size: medium;
+}
+.feSshB .ant-table-tbody > tr > td {
+  border-bottom: 1px solid #f5f7fa;
+  color:  black;
+  font-size: medium;
+}
+.feSshB .ant-layout-footer {
+  background: black;
+}
+
+
