@@ -31,12 +31,14 @@ function* loginSaga({
       params,
     );
     console.log(response)
+    
     if (response.token) {
-      localStorage.setItem("sessionToken", response.token);
+      localStorage.setItem("token", response.token);
       localStorage.setItem("fullName", response.fullName)
       localStorage.setItem("id", response.id);
-      localStorage.setItem("avatar", response.avatar);
+      localStorage.setItem("phoneNumber", response.phoneNumber);
       localStorage.setItem("role", response.role.name);
+      console.log(response.token);
       yield put(loginSuccessAction(response));
     } else {
       yield put(loginFailureAction(response));
@@ -47,8 +49,8 @@ function* loginSaga({
 }
 
 function logoutSaga() {
-  if (localStorage.getItem("sessionToken")) {
-    localStorage.clear('sessionToken');
+  if (localStorage.getItem("token")) {
+    localStorage.clear('token');
     localStorage.clear('fullName');
     localStorage.clear('id');
   }

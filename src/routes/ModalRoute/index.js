@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { lazy, Suspense, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

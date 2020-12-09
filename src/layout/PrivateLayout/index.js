@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/control-has-associated-label */
@@ -14,7 +15,6 @@ import SideBarMenu from './SideBarMenu/index';
 import { logout as logoutAction } from '../../redux/staff/actions';
 // import logo from '../../assets/images/logo.png';
 // import logoFull from '../../assets/images/Group 29@2x - white 1.png'
-import logoFull from '../../assets/images/Logo_dhbkdn.jpg'
 import logo from '../../assets/images/Logo_dhbkdn.jpg';
 import { AVATAR } from '../../configs/constants'
 
@@ -43,7 +43,7 @@ class PrivateLayout extends Component {
   };
 
   render() {
-    const { children, logout, isAuthenticated, fullName, avatar } = this.props;
+    const { children, logout, isAuthenticated, fullName } = this.props;
 
     if (!isAuthenticated) return <Redirect to="/login" />;
     return (

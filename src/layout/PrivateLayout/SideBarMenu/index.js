@@ -7,16 +7,23 @@ import { history } from "../../../redux/store";
 const sidebarMenu = [
   {
     key: "property",
-    text: "Lớp học",
-    url: "/classes",
+    text: "Quản lý Post",
+    url: "/post",
     icon: "project",
   },
   {
     key: "option",
-    text: "Cài đặt",
+    text: "Quản lý Place",
     url: "/options",
     icon: "setting",
   },
+  {
+    key: "listpost",
+    text: "Sự Kiện",
+    url: "/regis",
+    icon:"edit",
+    
+  }
 ];
 
 // Flatten sidebar menu
@@ -61,7 +68,7 @@ export default class SideBarMenu extends Component {
         <Menu.Item key="dashboard" onClick={() => history.push("/")}>
           <span>
             <Icon type="dashboard" />
-            <span>Dashboard</span>
+            <span>Quản Lý User</span>
           </span>
         </Menu.Item>
         {sidebarMenu.map((el) => {

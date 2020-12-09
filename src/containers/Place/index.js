@@ -1,58 +1,64 @@
-/* eslint-disable no-console */
-/* eslint-disable no-shadow */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable import/order */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-/* eslint-disable react/sort-comp */
-/* eslint-disable class-methods-use-this */
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-undef */
-/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable react/sort-comp */
+/* eslint-disable object-shorthand */
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-console */
+
 import React, { Component } from "react";
 import {
-  Table,
-  Popconfirm,
   Button,
-  Modal,
+  Table,
+  Icon,
+  Popconfirm,
+  message,
   Form,
   Input,
-  Icon,
-  message,
+  Modal,
+  DatePicker,
 } from "antd";
-import Highlighter from "react-highlight-words";
 import { number } from "prop-types";
-import { get, del, put, post } from "../../../api/utils";
-import "./styles.css";
-import { history } from "../../../redux/store";
+import Highlighter from "react-highlight-words";
+import moment from "moment";
+import { get, del, put, post } from "../../api/utils";
 
 const { Column } = Table;
-export default class ListClass extends Component {
+const onFinish = (values) => {
+  console.log("Received values of form: ", values);
+};
+export default class Place extends Component {
+  state = {
+    idUser: null,
+
+    searchText: "",
+    searchedColumn: "",
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-      results: [],
-      placeid: "",
-      des: "",
       open: false,
       visible: false,
       visibleAdd: false,
-      id: number,
-      ids: [],
-      searchText: "",
-      searchedColumn: "",
-      imageUrl:"",
+      results: [
+        {
+          id: number,
+          address: "",
+          date: "",
+          description: "",
+          city: "",
+        },
+      ],
     };
+
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
-
-  componentDidMount = async () => {
-    const res = await get("/posts");
-    console.log(res);
-    this.setState({
-      results: res,
-    });
-  };
 
   openModal() {
     this.setState({ open: true, visible: true });
@@ -76,42 +82,53 @@ export default class ListClass extends Component {
     });
 
     this.setState({
+      address: record.address,
       id: record.id,
+      typeBlood: record.typeBlood,
+      date: record.date,
+      city: record.city,
       description: record.description,
-      title: record.title,
-      imageUrl:record.imageUrl,
     });
+    console.log("AAAAAA", record);
   };
 
   handleCancel = () => {
     this.setState({ visible: false });
   };
 
+  componentDidMount = async () => {
+    const res = await get("/places");
+    console.log(res);
+    const results = res;
+
+    this.setState(results);
+  };
+
   deleteUser = async (id) => {
-    const res = await del(`/posts`, { id });
+    const res = await del(`/places`, { id });
     this.handleCancel();
     this.componentDidMount();
   };
 
   handleUpdate = async () => {
-    const { id, description, title, imageUrl } = this.state;
-    const data = {
-      id,
-    };
-    const dat = {
-      title,
-      description,
-      imageUrl,
-    };
-    console.log("BBBBBBBBBBBB", id);
-    console.log("FF", imageUrl);
+    const { date, city, address, description, id } = this.state;
 
-    const res = await put(`/posts/${data.id}`, dat);
-    this.handleCancel();
+    const dat = {
+      id: id,
+    };
+    const data = {
+      date: date,
+      city: city,
+      address: address,
+      description: description,
+    };
+    console.log(data);
+
+    const res = await put(`/places/${dat.id}`, data);
     this.componentDidMount();
+    this.closeModalAdd();
   };
 
-  
   confirm() {
     this.deleteUser();
   }
@@ -194,61 +211,41 @@ export default class ListClass extends Component {
     this.setState({ searchText: "" });
   };
 
-  uploadImage = async (e) => {
-    const file = e.target.files[0];
-    const base64 = await this.convertBase64(file);
-    const imageC = base64.slice(base64.indexOf(",") + 1);
-
-    this.setState({
-      imageUrl: imageC,
-    });
-  };
-
-  convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-
   render() {
-    const { visible, id } = this.state;
+    const { visible, oneperson, visibleAdd, id } = this.state;
 
     return (
-      <div>
-        <Button
-          type="primary"
-          style={{ marginBottom: "1em" }}
-          onClick={() => history.push("/post/createpost")}
-        >
-          Add Post +
-        </Button>
-        <br />
-
-        <Table dataSource={this.state.results} className="admin-table">
-          <Column title="ID" dataIndex="id" key="id" />
+      <div className="all">
+        <Table dataSource={this.state.results} bordered>
           <Column
-            title="Place ID"
-            dataIndex="placeId"
-            key="placeId"
-            {...this.getColumnSearchProps("placeId")}
+            title="ID"
+            dataIndex="id"
+            key="id"
+            {...this.getColumnSearchProps("id")}
           />
           <Column
-            title="Title"
-            dataIndex="title"
-            key="title"
-            {...this.getColumnSearchProps("title")}
+            title="Address"
+            dataIndex="address"
+            key="address"
+            {...this.getColumnSearchProps("address")}
+          />
+          <Column
+            title="Date"
+            dataIndex="date"
+            key="date"
+            {...this.getColumnSearchProps("date")}
+            render={(date) => <>{moment(date).format("DD-MM-YYYY")}</>}
           />
           <Column
             title="Description"
             dataIndex="description"
             key="description"
+          />
+          <Column
+            title="City"
+            dataIndex="city"
+            key="city"
+            {...this.getColumnSearchProps("city")}
           />
 
           <Column
@@ -257,32 +254,33 @@ export default class ListClass extends Component {
             render={(text, record) => (
               <Popconfirm
                 title="Are you sure delete this user?"
-                onConfirm={() => {
+                onConfirm={(onClick) => {
                   this.deleteUser(record.id);
                 }}
                 onCancel={this.cancel}
                 okText="Yes"
                 cancelText="No"
               >
-                <Button type="dashed" icon="delete" />
+                <Button type="primary" icon="delete" />
               </Popconfirm>
             )}
           />
           <Column
-            title="Update"
             align="center"
+            title="Update"
             render={(text, record) => (
               <Button
-                type="dashed"
+                type="primary"
                 onClick={() => this.showModal(record)}
                 icon="edit"
               />
             )}
           />
         </Table>
+
         <Modal
           visible={visible}
-          title="Update Post"
+          title="Title"
           onCancel={this.handleCancel}
           footer={[
             <Button key="back" onClick={this.handleCancel}>
@@ -293,38 +291,62 @@ export default class ListClass extends Component {
             </Button>,
           ]}
         >
-          <Form>
+          <Form initialValues={{ oneperson }} onFinish={onFinish}>
             <Form.Item
-              name="title"
-              rules={[{ required: true, message: "Please input title" }]}
+              name="date"
+              rules={[{ required: true, message: "Please input Date" }]}
             >
               <Input
                 type="text"
-                placeholder="Title"
-                value={this.state.title}
+                placeholder="Date"
+                value={this.state.date}
                 onChange={(text) => {
-                  this.setState({ title: text.target.value });
+                  console.log("AAAA", text);
+
+                  console.log(text);
+                  this.setState({ date: text.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              name="city"
+              rules={[{ required: true, message: "Please input City" }]}
+            >
+              <Input
+                type="text"
+                placeholder="City"
+                value={this.state.city}
+                onChange={(text) => {
+                  console.log("AAAA", text);
+                  this.setState({ city: text.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              name="address"
+              rules={[{ required: true, message: "Please input Address" }]}
+            >
+              <Input
+                type="text"
+                placeholder="Address"
+                value={this.state.address}
+                onChange={(text) => {
+                  console.log("AAAA", text);
+                  this.setState({ address: text.target.value });
                 }}
               />
             </Form.Item>
             <Form.Item
               name="description"
-              rules={[{ required: true, message: "Please input description" }]}
+              rules={[{ required: true, message: "Please input Description" }]}
             >
               <Input
                 type="text"
                 placeholder="Description"
                 value={this.state.description}
                 onChange={(text) => {
+                  console.log("AAAA", text);
                   this.setState({ description: text.target.value });
-                }}
-              />
-              <br />
-              <br />
-              <Input
-                type="file"
-                onChange={(e) => {
-                  this.uploadImage(e);
                 }}
               />
             </Form.Item>

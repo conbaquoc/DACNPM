@@ -3,7 +3,7 @@ import { StaffTypes } from './actions';
 
 // Setup inintial state for app
 export const initialState = {
-  isAuthenticated: !!localStorage.getItem('sessionToken'),
+  isAuthenticated: !!localStorage.getItem('token'),
   data: {
     fullName: localStorage.getItem('fullName') || '',
     id: localStorage.getItem('id') || '',

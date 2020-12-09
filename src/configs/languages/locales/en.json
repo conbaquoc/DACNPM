@@ -40,10 +40,10 @@
         "required": "Please input your confirm password!"
       }
     },
-    "email": {
-      "placeholder": "Email",
+    "phoneNumber": {
+      "placeholder": "phoneNumber",
       "validateMsg": {
-        "required": "Please input your email!"
+        "required": "Please input your phoneNumber!"
       }
     }
   },
@@ -59,7 +59,7 @@
     "title": "Login",
     "rememberMe": "Remember me",
     "loginBtn": "Log in",
-    "yourEmail": "Your Email",
+    "yourphoneNumber": "Your phoneNumber",
     "resetPassword": "Reset password",
     "password": "Password"
   },
@@ -73,7 +73,7 @@
     "title": "Forgot password",
     "success": {
       "title": "Reset Password Success!",
-      "description": "Please check your email and create a new password."
+      "description": "Please check your phoneNumber and create a new password."
     }
   },
 

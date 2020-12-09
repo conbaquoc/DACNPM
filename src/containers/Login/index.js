@@ -6,16 +6,37 @@ import { Form, Icon, Button, Checkbox } from "antd";
 import i18n from "i18next";
 import { loginAction } from "../../redux/staff/actions";
 import MaterialInput from "../../components/common/MaterialInput/index";
-import logo from '../../assets/images/logo1.png';
+
+import { post } from "../../api/utils";
 
 const FormItem = Form.Item;
 
 class Login extends Component {
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.login(values);
+      }
+    });
+  };
+
+  handleLogin = async () => {
+    this.props.form.validateFields(async (err, values) => {
+      if (!err) {
+        // eslint-disable-next-line no-unused-vars
+        const res = await post("/admins/login", values);
+
+        //   console.log(res);
+        //   console.log("AAAAAAAAAAAAAAAA");
+        //   // eslint-disable-next-line prefer-destructuring
+        // const  token  = res.token;
+        // console.log("AAAAAAAAAAAAAAAAA");
+        // console.log(res.token);
+        // console.log(res);
+        // localStorage.setItem('token', token);
+        // localStorage.getItem('token');
+        // console.log(token);
       }
     });
   };
@@ -26,24 +47,24 @@ class Login extends Component {
       return <Redirect to="/" />;
     }
     const { getFieldDecorator } = form;
+
     return (
       <div>
         <Form layout="vertical" onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator("email", {
+            {getFieldDecorator("phoneNumber", {
               rules: [
                 {
                   required: true,
-                  message: i18n.t("input.email.validateMsg.required"),
                 },
               ],
             })(
               <MaterialInput
-                placeholder={"Username"}
+                placeholder="Username"
                 prefix={
                   <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
-              />,
+              />
             )}
           </FormItem>
           <FormItem>
@@ -51,17 +72,14 @@ class Login extends Component {
               rules: [
                 {
                   required: true,
-                  message: i18n.t("input.password.validateMsg.required"),
                 },
               ],
             })(
               <MaterialInput
-                placeholder={i18n.t("input.password.placeholder")}
-                prefix={
-                  <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
+                placeholder="Mật Khẩu"
+                prefix={<Icon type="lock" style={{ color: "black" }} />}
                 type="password"
-              />,
+              />
             )}
           </FormItem>
           <div className="sub-action-div">
@@ -76,8 +94,9 @@ class Login extends Component {
               htmlType="submit"
               className="login-form-button"
               loading={this.props.isLoading}
+              onChange={this.handleLogin}
             >
-              {this.props.isLoading ? '' : i18n.t("login.loginBtn")}
+              {this.props.isLoading ? "" : i18n.t("login.loginBtn")}
             </Button>
           </div>
         </Form>
@@ -85,18 +104,17 @@ class Login extends Component {
     );
   }
 }
-
 Login.propTypes = {
   form: PropTypes.object,
   login: PropTypes.func,
   isAuthenticated: PropTypes.bool,
 };
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.staff.isAuthenticated,
   isLoading: state.staff.isShowLoading,
 });
-const mapDispatchToProps = dispatch => ({
-  login: params => {
+const mapDispatchToProps = (dispatch) => ({
+  login: (params) => {
     dispatch(loginAction(params));
   },
 });

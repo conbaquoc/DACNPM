@@ -1,58 +1,55 @@
-/* eslint-disable no-console */
-/* eslint-disable no-shadow */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable import/order */
 /* eslint-disable import/no-unresolved */
-/* eslint-disable react/sort-comp */
-/* eslint-disable class-methods-use-this */
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-undef */
-/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable react/sort-comp */
+/* eslint-disable object-shorthand */
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-console */
+
 import React, { Component } from "react";
 import {
-  Table,
-  Popconfirm,
   Button,
-  Modal,
+  Table,
+  Icon,
+  Popconfirm,
+  message,
   Form,
   Input,
-  Icon,
-  message,
+  Modal,
 } from "antd";
-import Highlighter from "react-highlight-words";
 import { number } from "prop-types";
+import Highlighter from "react-highlight-words";
 import { get, del, put, post } from "../../../api/utils";
-import "./styles.css";
-import { history } from "../../../redux/store";
 
 const { Column } = Table;
-export default class ListClass extends Component {
+const onFinish = (values) => {
+  console.log("Received values of form: ", values);
+};
+export default class ListUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: [],
-      placeid: "",
-      des: "",
+      person: [],
+      oneperson: {},
+      idUser: "",
+      fullName: "",
+      typeBlood: "",
+      avatar: "",
       open: false,
       visible: false,
       visibleAdd: false,
-      id: number,
-      ids: [],
+      password: "",
+      name: "",
+      phone: "",
       searchText: "",
       searchedColumn: "",
-      imageUrl:"",
     };
+
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
-
-  componentDidMount = async () => {
-    const res = await get("/posts");
-    console.log(res);
-    this.setState({
-      results: res,
-    });
-  };
 
   openModal() {
     this.setState({ open: true, visible: true });
@@ -76,49 +73,64 @@ export default class ListClass extends Component {
     });
 
     this.setState({
-      id: record.id,
-      description: record.description,
-      title: record.title,
-      imageUrl:record.imageUrl,
+      fullName: record.fullName,
+      idUser: record.id,
+      typeBlood: record.typeBlood,
     });
+    console.log("AAAAAA", record);
   };
 
   handleCancel = () => {
     this.setState({ visible: false });
   };
 
-  deleteUser = async (id) => {
-    const res = await del(`/posts`, { id });
-    this.handleCancel();
-    this.componentDidMount();
+  componentDidMount = async () => {
+    const res = await get("/admins/users");
+    console.log(res);
+    const persons = res;
+    this.setState({ persons });
+  };
+
+  deleteUser = async (idUser) => {
+    console.log(idUser);
+    const res = await del(`/admins/users/${idUser}`);
+    this.componentDidMount()
   };
 
   handleUpdate = async () => {
-    const { id, description, title, imageUrl } = this.state;
-    const data = {
-      id,
-    };
-    const dat = {
-      title,
-      description,
-      imageUrl,
-    };
-    console.log("BBBBBBBBBBBB", id);
-    console.log("FF", imageUrl);
+    const { idUser, fullName, phoneNumber } = this.state;
 
-    const res = await put(`/posts/${data.id}`, dat);
-    this.handleCancel();
+    const data = {
+      fullName: fullName,
+      phoneNumber: phoneNumber,
+    };
+
+    const res = await put(`/admins/users/${idUser}`, data);
     this.componentDidMount();
   };
 
-  
   confirm() {
     this.deleteUser();
+    this.componentDidMount();
   }
 
   cancel() {
     message.error("Click on No");
   }
+
+  handleCreate = async () => {
+    const { name, phone, password } = this.state;
+
+    const dat = {
+      fullName: name,
+      phoneNumber: phone,
+      password: password,
+    };
+
+    console.log("XXXXXXXXXX", dat);
+    const res = await post("/admins/register", dat);
+    this.componentDidMount();
+  };
 
   getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
@@ -194,95 +206,111 @@ export default class ListClass extends Component {
     this.setState({ searchText: "" });
   };
 
-  uploadImage = async (e) => {
-    const file = e.target.files[0];
-    const base64 = await this.convertBase64(file);
-    const imageC = base64.slice(base64.indexOf(",") + 1);
-
-    this.setState({
-      imageUrl: imageC,
-    });
-  };
-
-  convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-
   render() {
-    const { visible, id } = this.state;
+    const { visible, oneperson, visibleAdd } = this.state;
 
     return (
-      <div>
+      <div className="all">
         <Button
           type="primary"
           style={{ marginBottom: "1em" }}
-          onClick={() => history.push("/post/createpost")}
+          onClick={() => this.openModalAdd()}
         >
-          Add Post +
+          Add User +
         </Button>
         <br />
-
-        <Table dataSource={this.state.results} className="admin-table">
-          <Column title="ID" dataIndex="id" key="id" />
+        <Modal
+          title="Add User"
+          visible={visibleAdd}
+          isOpen={() => this.openModalAdd()}
+          onCancel={() => this.closeModalAdd()}
+          footer={[
+            <Button
+              key="submit"
+              type="submit"
+              onClick={() => this.handleCreate()}
+            >
+              Submit
+            </Button>,
+          ]}
+        >
+          <Form>
+            <Form.Item label="Full Name" rules={[{ required: true }]}>
+              <Input
+                type="text"
+                onChange={(text) => {
+                  console.log("AAAAQQQ", text);
+                  this.setState({ name: text.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item label="Phone Number" rules={[{ required: true }]}>
+              <Input
+                type="text"
+                onChange={(text) => {
+                  console.log("AAAAQQQ", text);
+                  this.setState({ phone: text.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item label="Password" rules={[{ required: true }]}>
+              <Input
+                type="password"
+                onChange={(text) => {
+                  console.log("AAAAQQQ", text);
+                  this.setState({ password: text.target.value });
+                }}
+              />
+            </Form.Item>
+          </Form>
+        </Modal>
+        <Table dataSource={this.state.persons} bordered>
           <Column
-            title="Place ID"
-            dataIndex="placeId"
-            key="placeId"
-            {...this.getColumnSearchProps("placeId")}
+            title="Name"
+            dataIndex="fullName"
+            key="fullName"
+            {...this.getColumnSearchProps("fullName")}
           />
           <Column
-            title="Title"
-            dataIndex="title"
-            key="title"
-            {...this.getColumnSearchProps("title")}
+            title="SDT"
+            dataIndex="phoneNumber"
+            key="phoneNumber"
+            {...this.getColumnSearchProps("phoneNumber")}
           />
-          <Column
-            title="Description"
-            dataIndex="description"
-            key="description"
-          />
-
+          <Column title="Type Blood" dataIndex="typeBlood" key="typeBlood" />
           <Column
             align="center"
             title="Delete"
             render={(text, record) => (
               <Popconfirm
                 title="Are you sure delete this user?"
-                onConfirm={() => {
+                onConfirm={(onClick) => {
                   this.deleteUser(record.id);
                 }}
                 onCancel={this.cancel}
                 okText="Yes"
                 cancelText="No"
               >
-                <Button type="dashed" icon="delete" />
+                <Button type="primary" icon="delete" />
               </Popconfirm>
             )}
           />
           <Column
-            title="Update"
             align="center"
+            title="Update"
             render={(text, record) => (
               <Button
-                type="dashed"
+                type="primary"
                 onClick={() => this.showModal(record)}
                 icon="edit"
               />
             )}
           />
         </Table>
+
         <Modal
           visible={visible}
-          title="Update Post"
+          title="Title"
           onCancel={this.handleCancel}
           footer={[
             <Button key="back" onClick={this.handleCancel}>
@@ -293,38 +321,32 @@ export default class ListClass extends Component {
             </Button>,
           ]}
         >
-          <Form>
+          <Form initialValues={{ oneperson }} onFinish={onFinish}>
             <Form.Item
-              name="title"
-              rules={[{ required: true, message: "Please input title" }]}
+              name="fullName"
+              rules={[{ required: true, message: "Please input fullName" }]}
             >
               <Input
                 type="text"
-                placeholder="Title"
-                value={this.state.title}
+                placeholder="Full Name"
+                value={this.state.fullName}
                 onChange={(text) => {
-                  this.setState({ title: text.target.value });
+                  console.log("AAAA", text);
+                  this.setState({ fullName: text.target.value });
                 }}
               />
             </Form.Item>
             <Form.Item
-              name="description"
-              rules={[{ required: true, message: "Please input description" }]}
+              name="phoneNumber"
+              rules={[{ required: true, message: "Please input Phone Number" }]}
             >
               <Input
                 type="text"
-                placeholder="Description"
-                value={this.state.description}
+                placeholder="Phone Number"
+                value={this.state.phoneNumber}
                 onChange={(text) => {
-                  this.setState({ description: text.target.value });
-                }}
-              />
-              <br />
-              <br />
-              <Input
-                type="file"
-                onChange={(e) => {
-                  this.uploadImage(e);
+                  console.log("AAAA", text);
+                  this.setState({ phoneNumber: text.target.value });
                 }}
               />
             </Form.Item>

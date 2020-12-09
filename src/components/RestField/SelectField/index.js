@@ -28,7 +28,7 @@ class SelectField extends Component {
         }}
       >
         {map(resourceData, item => (
-          <Menu.Item key={valueProps ? item[valueProps] : item}>
+          <.Item key={valueProps ? item[valueProps] : item}>
             {getRecordData(item, textProps)}
           </Menu.Item>
         ))}

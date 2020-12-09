@@ -2,7 +2,7 @@ FROM node:10-alpine as build
 
 WORKDIR /app
 
-ENV REACT_APP_SERVER_URL http://localhost:3000/api/v1
+ENV REACT_APP_SERVER_URL = http://18.216.109.33/api/v1
 
 COPY package.json /app/package.json
 

@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
-import { Card, DatePicker, Popover, Button, Form } from "antd";
-import { connect } from "react-redux";
+import { Card, DatePicker, Popover, Button } from "antd";
 import Wrapper, { FilterContentWrapper, TitleContentWrapper } from "./styles";
-import * as DashboardAction from "../../../../redux/dashboard/actions";
+
 
 const { MonthPicker } = DatePicker;
 
-class RealtorChart extends Component {
+export default class RealtorChart extends Component {
   constructor(props) {
     super(props);
     this.props.retrieveCharts({ resource: "realtors" });
@@ -140,13 +139,5 @@ const mapStateToProps = (state) => {
   return { realtors, chartDataLoading };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  retrieveCharts: (filterParams) => {
-    dispatch(DashboardAction.getChartAction(filterParams));
-  },
-});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Form.create()(RealtorChart));
+

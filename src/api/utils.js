@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 const checkIfErrorOccurs = res => ({
   code: res.status,
   res,
 });
 
-const TIME_OUT = 10000;
+const TIME_OUT = 20000;
 
 async function customFetch(path, headerOptions) {
   const normalFetch = fetch(path, headerOptions);
@@ -72,8 +73,12 @@ export default customFetch;
 
 function requestWrapper(method) {
   const request = async (url, data = null, params = {}) => {
-    let convertUrl = process.env.REACT_APP_SERVER_URL + url;
-    console.log(process.env.REACT_APP_SERVER_URL);
+    
+    let convertUrl = "http://18.216.109.33/api/v1" + url;
+     console.log(url);
+     console.log(convertUrl);
+    
+    
     
     
     let convertParams = params;
@@ -99,7 +104,7 @@ function requestWrapper(method) {
       },
     };
     // check that req url is relative and request was sent to our domain
-    const token = localStorage.getItem('sessionToken');
+    const token = localStorage.getItem('token');
     if (token) {
       defaults.headers.authorization = `Bearer ${token}`;
     }

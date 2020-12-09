@@ -13,7 +13,7 @@ export const callFunctionCloudCode = (functions, params) => {
 };
 
 export const deleteRecord = (resource, id) => {
-  return del(`/${resource}/${id}`);
+  return del(`/${resource}` , id);
 };
 
 export const postRecord = (resource, data) => {

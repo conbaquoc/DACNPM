@@ -40,10 +40,10 @@
         "required": "Nhập lại mật khẩu"
       }
     },
-    "email": {
-      "placeholder": "Email",
+    "phoneNumber": {
+      "placeholder": "phoneNumber",
       "validateMsg": {
-        "required": "Email không được để trống"
+        "required": "phoneNumber không được để trống"
       }
     },
     "propertyName": {
@@ -71,7 +71,7 @@
     "title": "Đăng nhập",
     "rememberMe": "Remember me",
     "loginBtn": "Đăng nhập",
-    "yourEmail": "Email của bạn",
+    "yourphoneNumber": "phoneNumber của bạn",
     "resetPassword": "Reset password",
     "password": "Mật khẩu"
   },
@@ -85,7 +85,7 @@
     "title": "Quên mật khẩu",
     "success": {
       "title": "Đặt lại mật khẩu thành công",
-      "description": "Kiểm tra email và đặt mật khẩu mới"
+      "description": "Kiểm tra phoneNumber và đặt mật khẩu mới"
     }
   },
 

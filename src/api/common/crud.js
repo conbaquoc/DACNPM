@@ -1,7 +1,7 @@
 import { get, post, put, del, patch } from "../utils";
 
 export async function getAllApi(resource, data) {
-  return get(`/${resource}`, data);
+  return get(`/users`, data);
 }
 
 export async function getDataByIdApi(resource, id, data) {

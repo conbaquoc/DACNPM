@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable consistent-return */
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
@@ -16,6 +18,7 @@ class DetailClass extends Component {
     visible: false,
     apiHistory: `rollcall/${this.props.match.params.id}/history`,
   };
+
   componentDidMount() {
     this.props.getClassInfo(this.props.match.params.id)
   }
@@ -44,7 +47,7 @@ class DetailClass extends Component {
     console.log(e);
     this.setState({
       visible: false,
-      apiHistory: `rollcall/${this.props.match.params.id}/history`
+      apiHistory: `rollcall/${this.props.match.params.id}/history`,
     });
   };
 
@@ -54,7 +57,7 @@ class DetailClass extends Component {
     const { getFieldDecorator } = form;
     // console.log(currentClass.subject);
     
-    const apiUrl = `classes/${this.props.match.params.id}/students`;
+    const apiUrl = `post/${this.props.match.params.id}/students`;
     // const apiHistory= `rollcall/${this.props.match.params.id}/history`
     // if(rollcallHistorySuccess === true) {
     //   this.setState({
@@ -67,7 +70,7 @@ class DetailClass extends Component {
         <RestList
           // title="Danh sách lớp học"
           // filter={<Filter />}
-          resource= {apiUrl}
+          resource={apiUrl}
           hasCreate={false}
           initialFilter={{ limit: 30, skip: 0, order: '-createdAt', filter: {} }}
           {...this.props}
@@ -82,8 +85,8 @@ class DetailClass extends Component {
             title="Tên sinh viên"
           />
           <Label
-            source="email"
-            title="Email"
+            source="phoneNumber"
+            title="phoneNumber"
           />
           
           <Label
@@ -113,7 +116,7 @@ class DetailClass extends Component {
           Trạng thái:
           {currentClass.status === 'active' ? 'Khả dụng': 'Đã xóa'}
         </p>
-        <Button type="primary" icon="plus" size="large"  onClick={this.showModal}>Bắt đầu buổi học</Button>
+        <Button type="primary" icon="plus" size="large" onClick={this.showModal}>Bắt đầu buổi học</Button>
         <Modal
           title="Bắt đầu buổi học"
           visible={this.state.visible}
@@ -126,8 +129,9 @@ class DetailClass extends Component {
                 rules: [
                   { required: true, message: 'Vui lòng nhập mã lớp học' },
                 ],
-                initialValue: currentClass.classCode
+                initialValue: currentClass.classCode,
                 })(
+                // eslint-disable-next-line react/jsx-indent
                 <Input placeholder="Mã lớp học" disabled />,
               )}
             </Form.Item>
@@ -137,7 +141,7 @@ class DetailClass extends Component {
                   { required: true, message: 'Vui lòng nhập buổi' },
                 ],
                 })(
-                <Input placeholder="Buổi thứ" />,
+                  <Input placeholder="Buổi thứ" />,
               )}
             </Form.Item>
             <Form.Item label="Thời gian vào lớp">
@@ -149,73 +153,73 @@ class DetailClass extends Component {
             <Form.Item label="Khoảng thời gian điểm danh:">
               {getFieldDecorator("rangeCheckIn",{
                 })(
-                <Input placeholder="Số phút" />,
+                  <Input placeholder="Số phút" />,
               )}
             </Form.Item>
           </Form>
         </Modal>
-        <br/>
+        <br />
         <Typography.Title level={4}>Danh sách điểm danh</Typography.Title>
-        {loading ? <Spin/> : (
+        {loading ? <Spin /> : (
           <RestList
           // title="Danh sách lớp học"
           // filter={<Filter />}
-          resource= {apiHistory}
-          hasCreate={false}
-          initialFilter={{ limit: 61, skip: 0, order: '-createdAt', filter: {} }}
-          {...this.props}
+            resource={apiHistory}
+            hasCreate={false}
+            initialFilter={{ limit: 61, skip: 0, order: '-createdAt', filter: {} }}
+            {...this.props}
         >
-          <Label
-            source="studentId"
-            title="ID sinh viên"
-            width="10%"
+            <Label
+              source="studentId"
+              title="ID sinh viên"
+              width="10%"
           />
           
-          <Label
-            source="studentFullName"
-            title="Tên sinh viên"
+            <Label
+              source="studentFullName"
+              title="Tên sinh viên"
           />
-          <Label
-            source="session"
-            title="Buổi"
+            <Label
+              source="session"
+              title="Buổi"
           />
-          <Label
-            source="rollCallCode"
-            title="Code lớp học"
+            <Label
+              source="rollCallCode"
+              title="Code lớp học"
           />
-          <Label
-            source="type"
-            title="Phân loại"
-            render={(value) => {
+            <Label
+              source="type"
+              title="Phân loại"
+              render={(value) => {
               if(!value) { return ""}
               if(value === "1") {return 'Khuôn mặt'}
               if(value === "2") { return 'Vân tay'}
             }}
           />
-          <Label
-            source="timeStart"
-            title="Thời gian bắt đầu"
-            render={(value) => moment(value).format('DD/MM/YYYY HH:mm:ss')}
+            <Label
+              source="timeStart"
+              title="Thời gian bắt đầu"
+              render={(value) => moment(value).format('DD/MM/YYYY HH:mm:ss')}
           />
-          <Label
-            source="timeEnd"
-            title="Thời gian kết thúc"
-            render={(value) => moment(value).format('DD/MM/YYYY HH:mm:ss')}
+            <Label
+              source="timeEnd"
+              title="Thời gian kết thúc"
+              render={(value) => moment(value).format('DD/MM/YYYY HH:mm:ss')}
           />
-          <Label
-            source="studentStatus"
-            title="Tình trạng sinh viên"
-            render={(value => {
+            <Label
+              source="studentStatus"
+              title="Tình trạng sinh viên"
+              render={(value => {
               if(!value && value !== 0) {return ""}
               if(value === 0) {return "Vắng"}
               if(value === 1) { return "Đã điểm danh"}
               if(value === 2) {return "Trễ điểm danh"}
             })}
           />
-          <Label
-            source="classStatus"
-            title="Trạng thái lớp học"
-            render={(value => {
+            <Label
+              source="classStatus"
+              title="Trạng thái lớp học"
+              render={(value => {
               if(value === 0) {return "Chưa vào lớp"}
               if(value === 1) { return "Đã vào lớp"}
               if(value === 2) {return "Kết thúc điểm danh"}
@@ -223,13 +227,13 @@ class DetailClass extends Component {
               if(value === 4) { return "Đã hủy"}
             })}
           />
-          <Label
-            source="checkInTime"
-            title="Thời gian điểm danh"
-            render={(value) => value ? moment(value).format('DD/MM/YYYY HH:mm:ss'): 'Chưa điểm danh'}
+            <Label
+              source="checkInTime"
+              title="Thời gian điểm danh"
+              render={(value) => value ? moment(value).format('DD/MM/YYYY HH:mm:ss'): 'Chưa điểm danh'}
           />
           
-        </RestList>
+          </RestList>
         )}
         
       </EventWrapper>
@@ -243,12 +247,12 @@ DetailClass.propTypes = {
 
 const mapStateToProps = state => {
   // const { data } = state.staff;
-  const { currentClass, loading, rollcallHistorySuccess } = state.classes;
+  const { currentClass, loading, rollcallHistorySuccess } = state.post;
   return {
     // data,
     currentClass,
     loading,
-    rollcallHistorySuccess
+    rollcallHistorySuccess,
   };
 };
 
@@ -258,6 +262,6 @@ const mapDispatchToProps = dispatch => ({
   },
   startRollcall: values => {
     dispatch(startRollcallAction(values))
-  }
+  },
 })
 export default connect(mapStateToProps, mapDispatchToProps )(Form.create()(DetailClass));

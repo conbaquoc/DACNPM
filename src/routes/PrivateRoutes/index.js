@@ -17,7 +17,7 @@ const routes = [
     title: i18n.t('dashboard.title'),
   },
   {
-    path: '/classes',
+    path: '/post',
     component: lazy(() => import('../../pages/Class/List')),
     exact: true,
     title: "Danh sách lớp học",
@@ -28,14 +28,71 @@ const routes = [
         exact: true,
         title: "Danh sách lớp học",
       },
-      {
-        path: '/:id/show',
-        component:lazy(() => import('../../pages/Class/Show')),
-        exact: true,
-        title: "Chi tiết lớp học",
-      },
+      
     ]
   },
+  {
+    path: '/options',
+    component: lazy(() => import('../../containers/Place/index')),
+    exact: true,
+    title: "Danh sách lớp học",
+    routes: [
+      {
+        path: '/',
+        component: lazy(() => import('../../containers/Place/index')),
+        exact: true,
+        title: "Danh sách lớp học",
+      },
+      
+    ]
+  },
+  {
+    path: '/post/createpost',
+    component: lazy(() => import('../../containers/Class/List/createpost')),
+    exact: true,
+    title: "Danh sách lớp học",
+    routes: [
+      {
+        path: '/',
+        component: lazy(() => import('../../containers/Class/List/createpost')),
+        exact: true,
+        title: "Danh sách lớp học",
+      },
+      
+    ]
+  },
+
+  {
+    path: '/post/finpost',
+    component: lazy(() => import('../../containers/Class/List/finpost')),
+    exact: true,
+    
+    routes: [
+      {
+        path: '/',
+        component: lazy(() => import('../../containers/Class/List/finpost')),
+        exact: true,
+        
+      },
+      
+    ]
+  },
+  {
+    path: '/regis',
+    component: lazy(() => import('../../pages/Class/Regis')),
+    exact: true,
+    title: "Danh sách đăng kí hiến máu",
+    routes: [
+      {
+        path: '/',
+        component: lazy(() => import('../../pages/Class/Regis')),
+        exact: true,
+        title: "Danh sách đăng kí hiến máu",
+      },
+      
+    ]
+  },
+
   // {
   //   path: '/properties',
   //   component: lazy(() => import('../../pages/Property/List')),
