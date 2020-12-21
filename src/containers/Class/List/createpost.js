@@ -75,7 +75,7 @@ export default class createpost extends Component {
     console.log("LLLLLLLL",this.state.city);
     return (
       <div>
-        <Button type="danger" icon="arrow-right" style={{marginLeft: "1200px"}} onClick={() => history.push("/post/finpost")}>Next</Button>
+        <Button type="danger" icon="arrow-right" style={{marginLeft: "1200px"}} onClick={() => history.push("/post/finpost")}>Back</Button>
         <br></br>
         <label>Input Date:</label>
         <br />

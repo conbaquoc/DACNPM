@@ -78,7 +78,7 @@ const routes = [
     ]
   },
   {
-    path: '/regis',
+    path: '/post/regis',
     component: lazy(() => import('../../pages/Class/Regis')),
     exact: true,
     title: "Danh sách đăng kí hiến máu",
@@ -88,6 +88,21 @@ const routes = [
         component: lazy(() => import('../../pages/Class/Regis')),
         exact: true,
         title: "Danh sách đăng kí hiến máu",
+      },
+      
+    ]
+  },
+  {
+    path: '/post/qrcode',
+    component: lazy(() => import('../../pages/Class/qrcode/qrcode')),
+    exact: true,
+    title: "QRCode",
+    routes: [
+      {
+        path: '/',
+        component: lazy(() => import('../../pages/Class/qrcode/qrcode')),
+        exact: true,
+        title: "QRCode",
       },
       
     ]

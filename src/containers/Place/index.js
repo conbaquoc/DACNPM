@@ -217,12 +217,12 @@ export default class Place extends Component {
     return (
       <div className="all">
         <Table dataSource={this.state.results} bordered>
-          <Column
+          {/* <Column
             title="ID"
             dataIndex="id"
             key="id"
             {...this.getColumnSearchProps("id")}
-          />
+          /> */}
           <Column
             title="Address"
             dataIndex="address"
@@ -236,11 +236,7 @@ export default class Place extends Component {
             {...this.getColumnSearchProps("date")}
             render={(date) => <>{moment(date).format("DD-MM-YYYY")}</>}
           />
-          <Column
-            title="Description"
-            dataIndex="description"
-            key="description"
-          />
+          
           <Column
             title="City"
             dataIndex="city"

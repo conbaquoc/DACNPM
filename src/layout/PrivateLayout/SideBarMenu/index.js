@@ -17,13 +17,7 @@ const sidebarMenu = [
     url: "/options",
     icon: "setting",
   },
-  {
-    key: "listpost",
-    text: "Sự Kiện",
-    url: "/regis",
-    icon:"edit",
-    
-  }
+  
 ];
 
 // Flatten sidebar menu

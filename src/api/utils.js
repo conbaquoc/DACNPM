@@ -77,10 +77,6 @@ function requestWrapper(method) {
     let convertUrl = "http://18.216.109.33/api/v1" + url;
      console.log(url);
      console.log(convertUrl);
-    
-    
-    
-    
     let convertParams = params;
     let convertData = data;
     if (method === 'GET') {
@@ -89,11 +85,15 @@ function requestWrapper(method) {
       convertParams = convertData;
 
       if (convertParams !== null) {
-        convertUrl = `${convertUrl}?${getQueryString(convertParams)}`;
+        convertUrl = `${convertUrl}`;
       }
       convertData = null;
     } else if (convertData === Object(convertData)) {
+      if (convertParams !== null) {
+        convertUrl = `${convertUrl}`;
+      }
       convertData = JSON.stringify(convertData);
+      console.log('convertData',convertUrl)
     }
 
     // default params for fetch = method + (Content-Type)
@@ -101,6 +101,7 @@ function requestWrapper(method) {
       method,
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
       },
     };
     // check that req url is relative and request was sent to our domain

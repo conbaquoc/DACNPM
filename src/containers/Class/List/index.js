@@ -8,7 +8,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable no-unused-vars */
-import React, { Component } from "react";
+import React, { Component, Link } from "react";
 import {
   Table,
   Popconfirm,
@@ -24,6 +24,7 @@ import { number } from "prop-types";
 import { get, del, put, post } from "../../../api/utils";
 import "./styles.css";
 import { history } from "../../../redux/store";
+import moment from "moment";
 
 const { Column } = Table;
 export default class ListClass extends Component {
@@ -40,7 +41,8 @@ export default class ListClass extends Component {
       ids: [],
       searchText: "",
       searchedColumn: "",
-      imageUrl:"",
+      imageUrl: "",
+      idpost: "",
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -79,7 +81,7 @@ export default class ListClass extends Component {
       id: record.id,
       description: record.description,
       title: record.title,
-      imageUrl:record.imageUrl,
+      imageUrl: record.imageUrl,
     });
   };
 
@@ -111,7 +113,6 @@ export default class ListClass extends Component {
     this.componentDidMount();
   };
 
-  
   confirm() {
     this.deleteUser();
   }
@@ -217,38 +218,50 @@ export default class ListClass extends Component {
     });
   };
 
+  
+
   render() {
     const { visible, id } = this.state;
+    console.log(this.state.idpost);
 
     return (
       <div>
         <Button
           type="primary"
           style={{ marginBottom: "1em" }}
-          onClick={() => history.push("/post/createpost")}
+          onClick={() => history.push("/post/finpost")}
         >
           Add Post +
         </Button>
         <br />
 
         <Table dataSource={this.state.results} className="admin-table">
-          <Column title="ID" dataIndex="id" key="id" />
-          <Column
-            title="Place ID"
-            dataIndex="placeId"
-            key="placeId"
-            {...this.getColumnSearchProps("placeId")}
-          />
           <Column
             title="Title"
             dataIndex="title"
             key="title"
+            width="8em"
             {...this.getColumnSearchProps("title")}
+          />
+          <Column
+            title="Address"
+            dataIndex="place.address"
+            key="place.address"
+            // {...this.getColumnSearchProps("placeId")}
+          />
+          
+          <Column
+            title="Time Donate"
+            dataIndex="dateDonate"
+            key="dateDonate"
+            width="9em"
+            render={(dateDonate) => <>{moment(dateDonate).format("DD-MM-YYYY")}</>}
           />
           <Column
             title="Description"
             dataIndex="description"
             key="description"
+            
           />
 
           <Column
@@ -276,6 +289,36 @@ export default class ListClass extends Component {
                 type="dashed"
                 onClick={() => this.showModal(record)}
                 icon="edit"
+              />
+            )}
+          />
+          <Column
+            title="List"
+            align="center"
+            render={(text, record) => (
+              <Button
+                type="dashed"
+                onClick={() =>
+                  this.props.history.push({
+                    pathname: "/post/regis",
+                    data: record.placeId,
+                  })}
+                icon="unordered-list"
+              />
+            )}
+          />
+          <Column
+            title="QR Code"
+            align="center"
+            render={(text, record) => (
+              <Button
+                type="dashed"
+                onClick={() =>
+                  this.props.history.push({
+                    pathname: "/post/qrcode",
+                    data: record.id,
+                  })}
+                icon="scan"
               />
             )}
           />

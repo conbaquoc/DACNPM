@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-undef */
@@ -31,7 +32,7 @@ export default class ListUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      person: [],
+      
       oneperson: {},
       idUser: "",
       fullName: "",
@@ -85,26 +86,37 @@ export default class ListUser extends Component {
   };
 
   componentDidMount = async () => {
-    const res = await get("/admins/users");
+    const res = await get('/admins/users');
     console.log(res);
-    const persons = res;
-    this.setState({ persons });
+    const result = res;
+
+    result.map((e) => {
+      if (e.role === 2) {
+        e.status = "Mod";
+      } else {
+        e.status = "User";
+      }
+    });
+    
+    this.setState({
+      res: result,
+    });
   };
 
   deleteUser = async (idUser) => {
     console.log(idUser);
     const res = await del(`/admins/users/${idUser}`);
-    this.componentDidMount()
+    this.componentDidMount();
   };
 
   handleUpdate = async () => {
-    const { idUser, fullName, phoneNumber } = this.state;
+    const { idUser, fullName, typeBlood } = this.state;
 
     const data = {
-      fullName: fullName,
-      phoneNumber: phoneNumber,
+      fullName:fullName,
+      typeBlood: typeBlood,
     };
-
+    console.log("KKKKKKKKKK",idUser);
     const res = await put(`/admins/users/${idUser}`, data);
     this.componentDidMount();
   };
@@ -264,7 +276,13 @@ export default class ListUser extends Component {
             </Form.Item>
           </Form>
         </Modal>
-        <Table dataSource={this.state.persons} bordered>
+        <Table dataSource={this.state.res} bordered>
+          <Column
+            title="Role"
+            dataIndex="status"
+            key="status"
+            {...this.getColumnSearchProps("status")}
+          />
           <Column
             title="Name"
             dataIndex="fullName"
@@ -277,6 +295,13 @@ export default class ListUser extends Component {
             key="phoneNumber"
             {...this.getColumnSearchProps("phoneNumber")}
           />
+          <Column
+            title="Email"
+            dataIndex="email"
+            key="email"
+            {...this.getColumnSearchProps("email")}
+          />
+          <Column title="City" dataIndex="district.name" key="district.name" />
           <Column title="Type Blood" dataIndex="typeBlood" key="typeBlood" />
           <Column
             align="center"
@@ -337,16 +362,16 @@ export default class ListUser extends Component {
               />
             </Form.Item>
             <Form.Item
-              name="phoneNumber"
-              rules={[{ required: true, message: "Please input Phone Number" }]}
+              name="typeBlood"
+              rules={[{ required: true, message: "Please input Type Blood" }]}
             >
               <Input
                 type="text"
-                placeholder="Phone Number"
-                value={this.state.phoneNumber}
+                placeholder="Type Blood"
+                value={this.state.typeBlood}
                 onChange={(text) => {
                   console.log("AAAA", text);
-                  this.setState({ phoneNumber: text.target.value });
+                  this.setState({ typeBlood: text.target.value });
                 }}
               />
             </Form.Item>
