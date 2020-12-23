@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable no-console */
 /* eslint-disable no-shadow */
 /* eslint-disable no-restricted-globals */
@@ -25,6 +26,7 @@ import { get, del, put, post } from "../../../api/utils";
 import "./styles.css";
 import { history } from "../../../redux/store";
 import moment from "moment";
+import Resizer from "react-image-file-resizer";
 
 const { Column } = Table;
 export default class ListClass extends Component {
@@ -195,15 +197,38 @@ export default class ListClass extends Component {
     this.setState({ searchText: "" });
   };
 
-  uploadImage = async (e) => {
-    const file = e.target.files[0];
-    const base64 = await this.convertBase64(file);
-    const imageC = base64.slice(base64.indexOf(",") + 1);
-
-    this.setState({
-      imageUrl: imageC,
+  resizeFile = (file) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        "JPEG",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "base64"
+      );
     });
-  };
+
+    uploadImage = async (e) => {
+      const file = e.target.files[0];
+      this.setState({
+        imgs: e.target.files,
+      });
+  
+      const image = await this.resizeFile(file);
+      console.log("ZZZZZZZZZZZZZ", image);
+      // const base64 = await this.convertBase64(file);
+      const imageC = image.slice(image.indexOf(",") + 1);
+      console.log("IIIIIIIIIIIII", imageC);
+  
+      this.setState({
+        imageUrl: imageC,
+      });
+    };
 
   convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -371,6 +396,13 @@ export default class ListClass extends Component {
                   this.uploadImage(e);
                 }}
               />
+              {this.state.imgs &&
+          [...this.state.imgs].map((file) => (
+            <img
+              src={URL.createObjectURL(file)}
+              style={{ width: "400px", height: "400px" }}
+            />
+          ))}
             </Form.Item>
           </Form>
         </Modal>
