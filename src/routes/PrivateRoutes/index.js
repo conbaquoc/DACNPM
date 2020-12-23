@@ -61,6 +61,69 @@ const routes = [
       
     ]
   },
+  {
+    path: '/city',
+    component: lazy(() => import('../../containers/Place/city')),
+    exact: true,
+    title: "Danh sách lớp học",
+    routes: [
+      {
+        path: '/',
+        component: lazy(() => import('../../containers/Place/city')),
+        exact: true,
+        title: "Danh sách lớp học",
+      },
+      
+    ]
+  },
+
+  {
+    path: '/district',
+    component: lazy(() => import('../../containers/Place/district')),
+    exact: true,
+    title: "Danh sách lớp học",
+    routes: [
+      {
+        path: '/',
+        component: lazy(() => import('../../containers/Place/district')),
+        exact: true,
+        title: "Danh sách lớp học",
+      },
+      
+    ]
+  },
+
+  {
+    path: '/district/createdistrict',
+    component: lazy(() => import('../../containers/Place/createdistrict')),
+    exact: true,
+    title: "Danh sách lớp học",
+    routes: [
+      {
+        path: '/',
+        component: lazy(() => import('../../containers/Place/createdistrict')),
+        exact: true,
+        title: "Danh sách lớp học",
+      },
+      
+    ]
+  },
+
+  {
+    path: '/city/createcity',
+    component: lazy(() => import('../../containers/Place/createcity')),
+    exact: true,
+    title: "Danh sách lớp học",
+    routes: [
+      {
+        path: '/',
+        component: lazy(() => import('../../containers/Place/createcity')),
+        exact: true,
+        title: "Danh sách lớp học",
+      },
+      
+    ]
+  },
 
   {
     path: '/post/finpost',

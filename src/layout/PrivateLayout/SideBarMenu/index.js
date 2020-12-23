@@ -17,6 +17,18 @@ const sidebarMenu = [
     url: "/options",
     icon: "setting",
   },
+  {
+    key: "city",
+    text: "Quản lý City",
+    url: "/city",
+    icon: "bank",
+  },
+  {
+    key: "district",
+    text: "Quản lý District",
+    url: "/district",
+    icon: "home",
+  },
   
 ];
 

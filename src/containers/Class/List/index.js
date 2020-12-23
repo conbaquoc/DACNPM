@@ -105,8 +105,8 @@ export default class ListClass extends Component {
       description,
       imageUrl,
     };
-    console.log("BBBBBBBBBBBB", id);
-    console.log("FF", imageUrl);
+    console.log(id);
+    console.log(imageUrl)
 
     const res = await put(`/posts/${data.id}`, dat);
     this.handleCancel();
@@ -247,6 +247,7 @@ export default class ListClass extends Component {
             title="Address"
             dataIndex="place.address"
             key="place.address"
+            width="10em"
             // {...this.getColumnSearchProps("placeId")}
           />
           

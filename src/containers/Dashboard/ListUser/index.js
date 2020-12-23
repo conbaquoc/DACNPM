@@ -20,7 +20,7 @@ import {
   Input,
   Modal,
 } from "antd";
-import { number } from "prop-types";
+
 import Highlighter from "react-highlight-words";
 import { get, del, put, post } from "../../../api/utils";
 
@@ -32,7 +32,6 @@ export default class ListUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
       oneperson: {},
       idUser: "",
       fullName: "",
@@ -86,7 +85,7 @@ export default class ListUser extends Component {
   };
 
   componentDidMount = async () => {
-    const res = await get('/admins/users');
+    const res = await get("/admins/users");
     console.log(res);
     const result = res;
 
@@ -97,7 +96,7 @@ export default class ListUser extends Component {
         e.status = "User";
       }
     });
-    
+
     this.setState({
       res: result,
     });
@@ -110,13 +109,12 @@ export default class ListUser extends Component {
   };
 
   handleUpdate = async () => {
-    const { idUser, fullName, typeBlood } = this.state;
+    const { idUser, typeBlood } = this.state;
 
     const data = {
-      fullName:fullName,
       typeBlood: typeBlood,
     };
-    console.log("KKKKKKKKKK",idUser);
+    console.log("KKKKKKKKKK", idUser);
     const res = await put(`/admins/users/${idUser}`, data);
     this.componentDidMount();
   };
@@ -299,10 +297,16 @@ export default class ListUser extends Component {
             title="Email"
             dataIndex="email"
             key="email"
-            {...this.getColumnSearchProps("email")}
+            
           />
           <Column title="City" dataIndex="district.name" key="district.name" />
-          <Column title="Type Blood" dataIndex="typeBlood" key="typeBlood" />
+          <Column
+            title="Type Blood"
+            dataIndex="typeBlood"
+            key="typeBlood"
+            
+            {...this.getColumnSearchProps("typeBlood")}
+          />
           <Column
             align="center"
             title="Delete"
@@ -347,20 +351,6 @@ export default class ListUser extends Component {
           ]}
         >
           <Form initialValues={{ oneperson }} onFinish={onFinish}>
-            <Form.Item
-              name="fullName"
-              rules={[{ required: true, message: "Please input fullName" }]}
-            >
-              <Input
-                type="text"
-                placeholder="Full Name"
-                value={this.state.fullName}
-                onChange={(text) => {
-                  console.log("AAAA", text);
-                  this.setState({ fullName: text.target.value });
-                }}
-              />
-            </Form.Item>
             <Form.Item
               name="typeBlood"
               rules={[{ required: true, message: "Please input Type Blood" }]}

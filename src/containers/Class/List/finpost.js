@@ -115,9 +115,7 @@ export default class finpost extends Component {
   render() {
    
     const { loading } = this.state;
-    console.log("MMMMMMMMMMMM", this.state.placeId);
-    console.log("TTTTTTTTTTT", this.state.imageUrl);
-    console.log("HHHHHHHHHHH", this.state.dateDonate);
+    
     return (
       <div>
         <label>Date Donate</label>
@@ -126,7 +124,7 @@ export default class finpost extends Component {
         <DatePicker
           onChange={(date, dateString) => {
             console.log("AAAAQQQ", dateString);
-            // (date) = moment(date).format("DDMMYYYY");
+           
             console.log("LLL", dateString);
             this.setState({ dateDonate: dateString });
           }}
@@ -139,8 +137,9 @@ export default class finpost extends Component {
         <Input
           type="text"
           placeholder="Input Title"
+          
           onChange={(text) => {
-            console.log("AAAAQQQ", text);
+            
             this.setState({ title: text.target.value });
           }}
         />
@@ -151,7 +150,7 @@ export default class finpost extends Component {
           type="text"
           placeholder="Input Description"
           onChange={(text) => {
-            console.log("AAAAQQQ", text);
+           
             this.setState({ description: text.target.value });
           }}
         />

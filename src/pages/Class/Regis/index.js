@@ -5,9 +5,10 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from "react";
 import { Button, Table } from "antd";
+import moment from 'moment';
 import { get } from "../../../api/utils";
 import { history } from "../../../redux/store";
-import moment from 'moment';
+
 const { Column } = Table;
 export default class index extends Component {
   constructor(props) {

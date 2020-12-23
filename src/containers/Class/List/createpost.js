@@ -34,7 +34,7 @@ export default class createpost extends Component {
 
   componentDidMount = async () => {
     const res = await get("/cities");
-    console.log("HHHHHHH", res.results);
+    console.log("HHHHHHH", res);
     this.setState({
       results: res,
     });
@@ -81,7 +81,7 @@ export default class createpost extends Component {
         <br />
         <DatePicker
           onChange={(date, dateString) => {
-                  console.log("AAAAQQQ", date);
+                  
                   this.setState({ date: dateString });
                 }}
           
@@ -98,8 +98,8 @@ export default class createpost extends Component {
           
           placeholder="Input City"
         >
-          {this.state.results.results &&
-            this.state.results.results.map((d) => (
+          {this.state.results &&
+            this.state.results.map((d) => (
               <Option key={d.name}>{d.name}</Option>
             ))}
         </Select>
