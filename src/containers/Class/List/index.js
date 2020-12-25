@@ -400,7 +400,7 @@ export default class ListClass extends Component {
           [...this.state.imgs].map((file) => (
             <img
               src={URL.createObjectURL(file)}
-              style={{ width: "400px", height: "400px" }}
+              style={{ width: "0px", height: "0px" }}
             />
           ))}
             </Form.Item>

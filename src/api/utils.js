@@ -74,7 +74,7 @@ export default customFetch;
 function requestWrapper(method) {
   const request = async (url, data = null, params = {}) => {
     
-    let convertUrl = "http://18.216.109.33/api/v1" + url;
+    let convertUrl = "http://13.212.220.243:8080/api/v1" + url;
      console.log(url);
      console.log(convertUrl);
     let convertParams = params;

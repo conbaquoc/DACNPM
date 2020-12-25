@@ -117,6 +117,8 @@ export default class ListUser extends Component {
     console.log("KKKKKKKKKK", idUser);
     const res = await put(`/admins/users/${idUser}`, data);
     this.componentDidMount();
+    this.closeModal();
+    this.handleCancel();
   };
 
   confirm() {
@@ -140,6 +142,7 @@ export default class ListUser extends Component {
     console.log("XXXXXXXXXX", dat);
     const res = await post("/admins/register", dat);
     this.componentDidMount();
+    this.closeModalAdd();
   };
 
   getColumnSearchProps = (dataIndex) => ({
