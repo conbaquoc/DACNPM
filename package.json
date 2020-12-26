@@ -44,7 +44,8 @@
         "reselect": "^4.0.0",
         "smooth-scrollbar": "^8.5.1",
         "styled-components": "^4.4.0",
-        "xlsx": "^0.15.6"
+        "xlsx": "^0.15.6",
+      "axios": "^0.21.0"
     },
     "devDependencies": {
         "babel-loader": "^8.0.6",
