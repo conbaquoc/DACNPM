@@ -25,7 +25,7 @@ export default class qrcode extends Component {
     const data = {
         id: this.props.location.data,
     }
-    axios.post('http://18.216.109.33/api/v1/posts/QRCode', data, {headers} ).then(res => this.setState({base: res.data}))
+    axios.post('http://13.212.220.243:8080/api/v1/posts/QRCode', data, {headers} ).then(res => this.setState({base: res.data}))
   }
     
 
@@ -33,6 +33,7 @@ export default class qrcode extends Component {
 
   render() {
     console.log(this.props.location.data);
+    console.log(this.state.base);
     return (
       <div>
         <Button onClick={() => history.push("/post")} type="primary" >Back</Button>
